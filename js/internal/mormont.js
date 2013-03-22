@@ -1,6 +1,6 @@
 /**
 Author: Chester Rivas
-Version: 0.01
+Version: 0.02
 Date: 3.3.13
 */
 
@@ -8,15 +8,16 @@ var App = {}
 
 App.init = function() {
 	console.log('start app');
+
 	App.checkSavedData();
-	ko.applyBindings(App.viewModel());
+
 };
 
 App.viewModel = function() {
 
 	var self = this;
 
-	self.savedBudgetList = App.savedData;
+
 
 	/*
 	self.budgetList = ko.computed(function() {
@@ -29,9 +30,9 @@ App.viewModel = function() {
 	}, self);
 	*/
 
-	self.expenseList = ko.observableArray([]);
+	self.expenseList = ko.observableArray(App.savedData.expenseData) || ko.observableArray([]);
 
-	self.incomeList = ko.observableArray([]);
+	self.incomeList = ko.observableArray(App.savedData.incomeData) || ko.observableArray([]);
 
 	self.total = ko.observable(0);
 
@@ -110,8 +111,9 @@ App.viewModel = function() {
 
 			self.clearField();
 
-			App.savedData.expenseData = self.expenseTotal();
-			localStorage.setItem("savedBudgetData", App.savedData);
+            debugger;
+			App.savedData.expenseData.push(newExpenseItem);
+			App.saveBudget();
 
     	}
 	};
@@ -128,8 +130,9 @@ App.viewModel = function() {
 
 			self.clearField();
 
-			App.savedData.incomeData = self.incomeTotal();
-			localStorage.setItem("savedBudgetData", App.savedData);
+            debugger;
+			App.savedData.incomeData.push(newIncomeItem);
+            App.saveBudget();
 
     	}
 	};
@@ -159,20 +162,47 @@ App.viewModel = function() {
 		$('.lightbox').show();
 	};
 
+    self.clearStorage = function() {
+        localStorage.clear();
+    };
+
 	return self;
 
 }
 
+App.localStorageObjectKey = 'savedBudgetData';
+
+App.saveBudget = function() {
+
+    // Put the object into storage
+    localStorage.setItem(App.localStorageObjectKey, JSON.stringify(App.savedData));
+
+};
+
 App.savedData = {
-	expenseData: null,
-	incomeData: null
+	expenseData: [],
+	incomeData: []
 };
 
 App.checkSavedData = function() {
-	var savedBudgetData = localStorage.getItem("savedBudgetData");
-	if (savedBudgetData) {
-		App.savedData = savedBudgetData;
-	}
+
+    // Retrieve the object from storage
+    var savedBudgetDataString = localStorage.getItem(App.localStorageObjectKey),
+        savedBudgetDataObject;
+
+	if (savedBudgetDataString) {
+
+        savedBudgetDataObject = JSON.parse(savedBudgetDataString);
+        console.log('savedBudgetDataObject: ', savedBudgetDataObject);
+		App.savedData = savedBudgetDataObject;
+
+        ko.applyBindings(App.viewModel());
+
+	} else {
+        console.log('NO APP DATA');
+        ko.applyBindings(App.viewModel());
+    }
+
 };
 
 $(App.init);

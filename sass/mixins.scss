@@ -1,0 +1,53 @@
+@import "variables";
+
+@mixin centeredAndFixed() {
+  width: $largeSize;
+  margin: 5px auto 0 auto;
+  @media #{$largeBreakpoint} {
+    width: 100%;
+  }
+}
+
+@mixin gradient($buttonBase1:$buttonBase1,$buttonBase2:$buttonBase2,$buttonBase3:$buttonBase3) {
+  background: $buttonBase1; /* Old browsers */
+  background: -moz-linear-gradient(top,  $buttonBase1 0%, $buttonBase2 40%, $buttonBase3 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$buttonBase1), color-stop(40%,$buttonBase2), color-stop(100%,$buttonBase3)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  $buttonBase1 0%,$buttonBase2 40%,$buttonBase3 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  $buttonBase1 0%,$buttonBase2 40%,$buttonBase3 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  $buttonBase1 0%,$buttonBase2 40%,$buttonBase3 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  $buttonBase1 0%,$buttonBase2 40%,$buttonBase3 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$buttonBase1', endColorstr='$buttonBase3',GradientType=0 ); /* IE6-9 */
+}
+
+@mixin removeGradient($flatColor) {
+  background-color: $flatColor;
+  background-image: none;
+  background-image: none;
+  background-image: none;
+  background-image: none;
+  background-image: none;
+  background-image: none;
+  background-repeat: no-repeat;
+  filter: none;
+}
+
+@mixin dropShadow($offsetX:0, $offsetY:0, $blur:0, $spread:0, $sColour:$shadowColour) {
+  -webkit-box-shadow: $offsetX + px $offsetY + px $blur + px $spread + px $sColour;
+  -moz-box-shadow: $offsetX + px $offsetY + px $blur + px $spread + px $sColour;
+  box-shadow: $offsetX + px $offsetY + px $blur + px $spread + px $sColour;
+}
+
+@mixin innerDropShadow($offsetX:0, $offsetY:0, $blur:0, $spread:0, $sColour:$shadowColour) {
+
+  -moz-box-shadow: inset -5px -5px 5px 5px #888;
+  -webkit-box-shadow: inset -5px -5px 5px 5px#888;
+  box-shadow: inset -5px -5px 5px 5px #888;
+
+}
+
+
+@mixin removeShadow() {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
