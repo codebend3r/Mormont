@@ -11,27 +11,16 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Trebuchet MS";
-  font-size: 1rem;
+  font-size: .8rem;
+  background-color: $quadraryColour;
+  color: $textColour;
+  @include textShadow();
 }
 
 .mormont-app {
-  background-color: #eeeeee;
   padding: 10px;
   margin: 0 auto;
-  width: 900px;
-}
-
-.add-expense-modal, .add-income-modal {
-  display: none;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 300px;
-  height: 250px;
-  margin-left: -150px;
-  margin-top: -125px;
-  background-color: #eeeeee;
-  padding: 10px;
+  width: $bigWidth;
 }
 
 .lightbox {
@@ -47,21 +36,102 @@ body {
 
 .expense-list, .income-list {
   list-style: none;
-  color: black;
   padding: 0;
   margin: 0;
 }
 
+
+.row-item {
+  padding: 5px 10px;
+  cursor: pointer;
+  height: 20px;
+  line-height: 20px;
+}
+
 .expense-item {
-  color: #990000;
+
+  .button-edit, .button-delete {
+    float: right;
+  }
+
+  &:hover {
+
+    color: $tertiaryColour;
+    background-color: $textColour;
+    @include removeTextShadow();
+
+    .button-edit, .button-delete {
+      display: inline-block;
+    }
+
+  }
+
 }
 
 .income-item {
-  color: #009900;
+
+  .button-edit, .button-delete {
+    float: right;
+  }
+
+  &:hover {
+
+    color: $tertiaryColour;
+    background-color: $textColour;
+    @include removeTextShadow();
+
+    .button-edit, .button-delete {
+      display: inline-block;
+    }
+
+  }
+
 }
 
-.total {
-  border-top: 2px solid #333333;
-  font-size: 16px;
-  padding: 5px 0;
+.input-label, .checbox-section {
+  margin: 0 0 10px 0;
+}
+
+.recurring-list {
+  width: 300px;
+}
+
+.total, .budget-items {
+  font-weight: bold;
+  padding: 5px 10px;
+  margin: 0;
+}
+
+.big-text {
+  font-size: 1.3rem;
+}
+
+.total-digit {
+  font-size: 1rem;
+}
+
+.budget-items {
+  border-bottom: 1px dotted white;
+}
+
+.income-bg {
+  background-color: $secodaryColour;
+}
+
+.expense-bg {
+  background-color: $primaryColour;
+  margin: 0 0 10px 0;
+}
+
+.total-bg {
+  background-color: $tertiaryColour;
+  margin: 0 0 10px 0;
+}
+
+.income-colour {
+  color: $secodaryColour;
+}
+
+.expense-colour {
+  color: $primaryColour;
 }

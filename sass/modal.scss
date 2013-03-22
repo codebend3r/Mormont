@@ -1,0 +1,27 @@
+@import "variables";
+@import "mixins";
+
+.add-expense-modal, .add-income-modal {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 300px;
+  height: 350px;
+  margin-left: -150px;
+  margin-top: -125px;
+  padding: 10px;
+}
+
+.add-expense-modal {
+  background-color: $expenseMedium;
+}
+
+
+.add-income-modal {
+  background-color: $incomeMedium;
+}
+
+.modal-input-text {
+  width: 280px;
+}

@@ -8,6 +8,12 @@
   }
 }
 
+@mixin roundedComponent() {
+  border-radius: 5px;
+  border: none;
+}
+
+
 @mixin gradient($buttonBase1:$buttonBase1,$buttonBase2:$buttonBase2,$buttonBase3:$buttonBase3) {
   background: $buttonBase1; /* Old browsers */
   background: -moz-linear-gradient(top,  $buttonBase1 0%, $buttonBase2 40%, $buttonBase3 100%); /* FF3.6+ */
@@ -50,4 +56,12 @@
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
+}
+
+@mixin textShadow() {
+  text-shadow: 0 0 5px #585858;
+}
+
+@mixin removeTextShadow() {
+  text-shadow: none;
 }

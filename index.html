@@ -4,67 +4,125 @@
 
     <title>Mormont</title>
 
-    <link rel="stylesheet" href="css/normalize-2.1.0.css" />
-    <link rel="stylesheet" href="css/main.css" />
-    <script src="js/external/jquery-1.9.1.js"></script>
-    <script src="js/external/knockout-2.2.1.js"></script>
-    <script src="js/internal/mormont.js"></script>
+    <link rel='stylesheet' href='css/normalize.css' />
+    <link rel='stylesheet' href='css/main.css' />
+    <link rel='stylesheet' href='css/modal.css' />
+    <link rel='stylesheet' href='css/button.css' />
+    <link rel='stylesheet' href='css/headers.css' />
+    <link rel='stylesheet' href='css/site-resets.css' />
 
 </head>
 <body>
 
-    <div class="mormont-app">
+    <div class='mormont-app'>
 
-        <h2>Budget</h2>
+        <h1>Budget</h1>
 
-        <ul class="income-list" data-bind="foreach: incomeList">
-            <li class="income-item"><span data-bind="text: incomeName"></span> - $<span data-bind="text: cost"></span></li>
-        </ul>
+        <div class='budget-items income-bg'>
 
-        <ul class="expense-list" data-bind="foreach: expenseList">
-            <li class="expense-item"><span data-bind="text: expenseName"></span> - $<span data-bind="text: cost"></span></li>
-        </ul>
+            <h3>Income</h3>
 
-        <div class="total">
-            Income Total: $<span class="total-digit" data-bind="text: incomeTotal()"></span>
+            <ul class='income-list' data-bind='foreach: incomeList'>
+                <li class='row-item income-item'>
+                    <span class='income-text' data-bind='text: incomeName'></span>: $<span data-bind='text: cost'></span>
+                    <span class='income-text' data-bind='text: dateCreated'></span>
+                    <button class='button-delete hidden inline-block'>Delete</button>
+                    <button class='button-edit hidden inline-block'>Edit</button>
+                </li>
+            </ul>
+
+        </div>
+        <div class='budget-items expense-bg'>
+
+            <h3>Expenses</h3>
+
+            <ul class='expense-list' data-bind='foreach: expenseList'>
+                <li class='row-item expense-item'>
+                    <span class='expense-text' data-bind='text: expenseName'></span>: $<span data-bind='text: cost'></span>
+                    <span class='income-text' data-bind='text: dateCreated'></span>
+                    <button class='button-delete hidden inline-block'>Delete</button>
+                    <button class='button-edit hidden inline-block'>Edit</button>
+                </li>
+            </ul>
+
         </div>
 
-        <div class="total">
-            Expense Total: $<span class="total-digit" data-bind="text: expenseTotal()"></span>
+        <div class='total-bg'>
+
+            <div class='total'>
+                Income Total: <span class='total-digit income-colour' data-bind='text: incomeTotalPrice()'></span>
+            </div>
+
+            <div class='total'>
+                Expense Total: <span class='total-digit expense-colour' data-bind='text: expenseTotalPrice()'></span>
+            </div>
+
+            <div class='total big-text'>
+                Remaining Budget: <span class='big-text' data-bind='text: remainingBudget()'></span>
+            </div>
+
         </div>
 
-        <div class="total">
-            Remaining Budget: $<span class="total-digit" data-bind="text: remainingBudget()"></span>
-        </div>
+        <button class='button-expense' type='submit' data-bind='click: showExpenseModal'>New Expense</button>
+        <button class='button-income' type='submit' data-bind='click: showIncomeModal'>New Income</button>
+        <button class='button-income' type='submit' data-bind='click: clearStorage'>Clear Storage</button>
 
-        <button type="submit" data-bind="click: showExpenseModal">Add New Expense</button>
-        <button type="submit" data-bind="click: showIncomeModal">Add New Income</button>
-        <button type="submit" data-bind="click: clearStorage">Clear Data</button>
+        <div class='lightbox'></div>
 
+        <div class='add-expense-modal'>
 
+            <button class='button-close' data-bind='click: closeModal'></button>
 
-        <div class="lightbox"></div>
-
-        <div class="add-expense-modal">
             <h3>Add New Expense</h3>
-            Add expense name:<br/>
-            <input type="text" data-bind='value:expenseNameAdd, valueUpdate: "afterkeydown"' /><br/><br/>
-            Add expense cost:<br/> 
-            <input type="text" data-bind='value:expenseCostAdd, valueUpdate: "afterkeydown"' /><br/><br/>
-            <input type="checkbox" name="recurring">Make recurring expense<br/>
-            <button type="submit" data-bind="click: addNewExpense, enable: validateExpenseFields">Add Expense</button>
+
+            <div class='input-label'>
+                <p>Add expense name:</p>
+                <input class='modal-input-text' type='text' placeholder='Expense Name' data-bind='value:expenseNameAdd, valueUpdate: "afterkeydown"' />
+            </div>
+
+            <div class='input-label'>
+                <p>Add expense cost:</p>
+                <input class='modal-input-text' type='text' placeholder='$ Price' data-bind='value:expenseCostAdd, valueUpdate: "afterkeydown"' />
+            </div>
+
+            <div class='checbox-section'>
+                <input class='recurring-checkbox' type='checkbox' data-bind='checked: expenseRecurring' name='recurring'>Make recurring expense
+            </div>
+
+            <select class='recurring-list' data-bind='visible: expenseRecurring, options: recurringOptions' size='5'></select>
+            <button class='button-expense white-border' type='submit' data-bind='click: addNewExpense, enable: validateExpenseFields'>Add Expense</button>
         </div>
 
-        <div class="add-income-modal">
+        <div class='add-income-modal'>
+
+            <button class='button-close' data-bind='click: closeModal'></button>
+
             <h3>Add New Income</h3>
-            Add expense name:<br/>
-            <input type="text" data-bind='value:incomeNameAdd, valueUpdate: "afterkeydown"' /><br/><br/>
-            Add expense cost:<br/> 
-            <input type="text" data-bind='value:incomeCostAdd, valueUpdate: "afterkeydown"' /><br/><br/>
-            <button type="submit" data-bind="click: addNewIncome, enable: validateIncomeFields">Add Income</button>
+
+            <div class='input-label'>
+                Add expense name:<br/>
+                <input class='modal-input-text' type='text' placeholder='Input Name' data-bind='value:incomeNameAdd, valueUpdate: "afterkeydown"' />
+            </div>
+
+            <div class='input-label'>
+                Add expense cost:<br/>
+                <input class='modal-input-text' type='text' placeholder='$ Price' data-bind='value:incomeCostAdd, valueUpdate: "afterkeydown"' />
+            </div>
+
+            <div class='checbox-section'>
+                <input class='recurring-checkbox' type='checkbox' data-bind='checked: incomeRecurring' name='recurring'>Make recurring income
+            </div>
+
+            <select class='recurring-list' data-bind='visible: incomeRecurring, options: recurringOptions' size='5'></select>
+            <button class='button-income white-border' type='submit' data-bind='click: addNewIncome, enable: validateIncomeFields'>Add Income</button>
         </div>
 
     </div>
+
+    <script src='js/external/jquery-1.9.1.js'></script>
+    <script src='js/external/knockout-2.2.1.js'></script>
+    <script src='js/external/date.js'></script>
+    <script src='js/internal/mormont.js'></script>
 
 </body>
 </html>

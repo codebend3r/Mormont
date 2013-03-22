@@ -1,0 +1,51 @@
+@import "variables";
+@import "mixins";
+
+button {
+  @include roundedComponent();
+  @include textShadow();
+  font-weight: bold;
+  padding: 10px;
+}
+
+.button-edit {
+  color: $textColour;
+  @include gradient($editLight, $editMedium, $editDark);
+  padding: 2px 10px;
+  margin: 0 2px;
+  vertical-align: middle;
+}
+
+.button-delete {
+  color: $textColour;
+  @include gradient($editLight, $editMedium, $editDark);
+  padding: 2px 10px;
+  margin: 0 2px;
+  vertical-align: middle;
+}
+
+.button-expense {
+  @include gradient($expenseLight, $expenseMedium, $expenseDark);
+  color: $textColour;
+  margin: 0 0 5px 0;
+}
+
+.button-income {
+  @include gradient($incomeLight, $incomeMedium, $incomeDark);
+  color: $textColour;
+  margin: 0 0 5px 0;
+}
+
+.button-close {
+  @include gradient(white, white, white);
+  color: #333333;
+  width: 20px;
+  height: 20px;
+  right: 10px;
+  top: 10px;
+  position: absolute;
+}
+
+.white-border {
+  border: 2px solid white;
+}

@@ -1,0 +1,93 @@
+html {
+  padding: 0;
+  margin: 0; }
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Trebuchet MS";
+  font-size: .8rem;
+  background-color: #818b85;
+  color: #fafafa;
+  text-shadow: 0 0 5px #585858; }
+
+.mormont-app {
+  padding: 10px;
+  margin: 0 auto;
+  width: 900px; }
+
+.lightbox {
+  display: none;
+  position: absolute;
+  background-color: #000000;
+  left: 0px;
+  top: 0px;
+  opacity: .5;
+  width: 100%;
+  height: 100%; }
+
+.expense-list, .income-list {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
+.row-item {
+  padding: 5px 10px;
+  cursor: pointer;
+  height: 20px;
+  line-height: 20px; }
+
+.expense-item .button-edit, .expense-item .button-delete {
+  float: right; }
+.expense-item:hover {
+  color: #2fcad8;
+  background-color: #fafafa;
+  text-shadow: none; }
+  .expense-item:hover .button-edit, .expense-item:hover .button-delete {
+    display: inline-block; }
+
+.income-item .button-edit, .income-item .button-delete {
+  float: right; }
+.income-item:hover {
+  color: #2fcad8;
+  background-color: #fafafa;
+  text-shadow: none; }
+  .income-item:hover .button-edit, .income-item:hover .button-delete {
+    display: inline-block; }
+
+.input-label, .checbox-section {
+  margin: 0 0 10px 0; }
+
+.recurring-list {
+  width: 300px; }
+
+.total, .budget-items {
+  font-weight: bold;
+  padding: 5px 10px;
+  margin: 0; }
+
+.big-text {
+  font-size: 1.3rem; }
+
+.total-digit {
+  font-size: 1rem; }
+
+.budget-items {
+  border-bottom: 1px dotted white; }
+
+.income-bg {
+  background-color: #a9dc3a; }
+
+.expense-bg {
+  background-color: #d45354;
+  margin: 0 0 10px 0; }
+
+.total-bg {
+  background-color: #2fcad8;
+  margin: 0 0 10px 0; }
+
+.income-colour {
+  color: #a9dc3a; }
+
+.expense-colour {
+  color: #d45354; }

@@ -1,0 +1,45 @@
+@import "variables";
+@import "mixins";
+
+input, select, button {
+  display: block;
+}
+
+input[type="checkbox"] {
+  display: inline-block;
+
+  &.recurring-checkbox {
+    padding-right: 10px;
+  }
+
+}
+
+input[type="text"] {
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
+.align-top {
+  vertical-align: top;
+}
+
+.hidden {
+  display: none;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
