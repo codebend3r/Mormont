@@ -1,0 +1,1 @@
+sass --watch C:/Dropbox/Apps/Mormont/sass:C:/Dropbox/Apps/Mormont/css

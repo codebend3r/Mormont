@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Mormont</title>
+
+    <link rel="stylesheet" href="css/normalize-2.1.0.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="js/external/jquery-1.9.1.js"></script>
+    <script src="js/external/knockout-2.2.1.js"></script>
+    <script src="js/internal/mormont.js"></script>
+
+</head>
+<body>
+
+    <div class="mormont-app">
+
+        <h2>Budget</h2>
+
+        <ul class="income-list" data-bind="foreach: incomeList">
+            <li class="income-item"><span data-bind="text: incomeName"></span> - $<span data-bind="text: cost"></span></li>
+        </ul>
+
+        <ul class="expense-list" data-bind="foreach: expenseList">
+            <li class="expense-item"><span data-bind="text: expenseName"></span> - $<span data-bind="text: cost"></span></li>
+        </ul>
+
+        <div class="total">
+            Income Total: $<span class="total-digit" data-bind="text: incomeTotal()"></span>
+        </div>
+
+        <div class="total">
+            Expense Total: $<span class="total-digit" data-bind="text: expenseTotal()"></span>
+        </div>
+
+        <div class="total">
+            Remaining Budget: $<span class="total-digit" data-bind="text: remainingBudget()"></span>
+        </div>
+
+        <button type="submit" data-bind="click: showExpenseModal">Add New Expense</button>
+        <button type="submit" data-bind="click: showIncomeModal">Add New Income</button>
+
+        <div class="lightbox"></div>
+
+        <div class="add-expense-modal">
+            <h3>Add New Expense</h3>
+            Add expense name:<br/>
+            <input type="text" data-bind='value:expenseNameAdd, valueUpdate: "afterkeydown"' /><br/><br/>
+            Add expense cost:<br/> 
+            <input type="text" data-bind='value:expenseCostAdd, valueUpdate: "afterkeydown"' /><br/><br/>
+            <input type="checkbox" name="recurring">Make recurring expense<br/>
+            <button type="submit" data-bind="click: addNewExpense, enable: validateExpenseFields">Add Expense</button>
+        </div>
+
+        <div class="add-income-modal">
+            <h3>Add New Income</h3>
+            Add expense name:<br/>
+            <input type="text" data-bind='value:incomeNameAdd, valueUpdate: "afterkeydown"' /><br/><br/>
+            Add expense cost:<br/> 
+            <input type="text" data-bind='value:incomeCostAdd, valueUpdate: "afterkeydown"' /><br/><br/>
+            <button type="submit" data-bind="click: addNewIncome, enable: validateIncomeFields">Add Income</button>
+        </div>
+
+    </div>
+
+</body>
+</html>
