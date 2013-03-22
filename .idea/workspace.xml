@@ -183,7 +183,7 @@
       <file leaf-file-name="mormont.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/internal/mormont.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="281" column="25" selection-start="6741" selection-end="6741" vertical-scroll-proportion="0.15445322">
+            <state line="305" column="70" selection-start="7271" selection-end="7271" vertical-scroll-proportion="0.56031567">
               <folding />
             </state>
           </provider>
@@ -424,7 +424,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="54" y="-8" width="1874" height="1096" extended-state="6" />
+    <frame x="54" y="-8" width="1874" height="1096" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -624,7 +624,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/internal/mormont.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="281" column="25" selection-start="6741" selection-end="6741" vertical-scroll-proportion="0.15445322">
+        <state line="305" column="70" selection-start="7271" selection-end="7271" vertical-scroll-proportion="0.56031567">
           <folding />
         </state>
       </provider>

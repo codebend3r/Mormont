@@ -1,0 +1,9 @@
+#output
+bin
+release
+
+# RubyMine/IntelliJ
+.idea
+
+# Sass
+.sass-cache

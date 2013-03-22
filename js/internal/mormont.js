@@ -311,6 +311,7 @@ App.checkSavedData = function() {
 
         console.log('savedBudgetDataObject', savedBudgetDataObject);
 
+
 		App.savedData = savedBudgetDataObject;
 
         ko.applyBindings(App.viewModel());
