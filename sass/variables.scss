@@ -1,5 +1,5 @@
 $primaryColour: #D45354;
-$secodaryColour: #A9DC3A;
+$secodaryColour: #76ad40;
 $tertiaryColour: #2FCAD8;
 $quadraryColour: #818B85;
 $quintaryColour: #CDCDC1;
@@ -12,13 +12,13 @@ $lightBlue: $tertiaryColour;
 
 $textColour: #fafafa;
 
-$expenseLight: #e05758;
+$expenseLight: $primaryColour;
 $expenseMedium: $primaryColour;
-$expenseDark: #c34d4e;
+$expenseDark: $primaryColour;
 
-$incomeLight: #b2e63d;
+$incomeLight: $secodaryColour;
 $incomeMedium: $secodaryColour;
-$incomeDark: #9cce36;
+$incomeDark: $secodaryColour;
 
 $editLight: #31d8e6;
 $editMedium: $tertiaryColour;

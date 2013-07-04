@@ -40,6 +40,7 @@
                 <li class='row-item expense-item'>
                     <span class='expense-text' data-bind='text: expenseName'></span>: $<span data-bind='text: cost'></span>
                     <span class='income-text' data-bind='text: dateCreated'></span>
+                    <span class='recurring-text-true' data-bind='visible: recurring'>YES</span>
                     <button class='button-delete hidden inline-block'>Delete</button>
                     <button class='button-edit hidden inline-block'>Edit</button>
                 </li>
@@ -86,11 +87,12 @@
             </div>
 
             <div class='checbox-section'>
-                <input class='recurring-checkbox' type='checkbox' data-bind='checked: expenseRecurring' name='recurring'>Make recurring expense
+                <input class='recurring-checkbox' type='checkbox' data-bind='checked: isExpenseRecurring' name='recurring'>Make recurring expense
             </div>
 
-            <select class='recurring-list' data-bind='visible: expenseRecurring, options: recurringOptions' size='5'></select>
+            <select class='recurring-list' data-bind='visible: isExpenseRecurring, options: recurringOptions, selectedOptions: chosenOption' size='5'></select>
             <button class='button-expense white-border' type='submit' data-bind='click: addNewExpense, enable: validateExpenseFields'>Add Expense</button>
+
         </div>
 
         <div class='add-income-modal'>
@@ -110,10 +112,10 @@
             </div>
 
             <div class='checbox-section'>
-                <input class='recurring-checkbox' type='checkbox' data-bind='checked: incomeRecurring' name='recurring'>Make recurring income
+                <input class='recurring-checkbox' type='checkbox' data-bind='checked: isIncomeRecurring' name='recurring'>Make recurring income
             </div>
 
-            <select class='recurring-list' data-bind='visible: incomeRecurring, options: recurringOptions' size='5'></select>
+            <select class='recurring-list' data-bind='visible: isIncomeRecurring, options: recurringOptions' size='5'></select>
             <button class='button-income white-border' type='submit' data-bind='click: addNewIncome, enable: validateIncomeFields'>Add Income</button>
         </div>
 

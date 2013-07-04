@@ -94,6 +94,8 @@ body {
 
 .recurring-list {
   width: 300px;
+  padding: 5px;
+  margin: 10px 0;
 }
 
 .total, .budget-items {
@@ -129,9 +131,9 @@ body {
 }
 
 .income-colour {
-  color: $secodaryColour;
+  color: $textColour;
 }
 
 .expense-colour {
-  color: $primaryColour;
+  color: $textColour;
 }

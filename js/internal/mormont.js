@@ -1,327 +1,494 @@
 /**
-Author: Chester Rivas
-Version: 0.02
-Date: 3.3.13
-*/
+ Author: Chester Rivas
+ Version: 0.03
+ Date: 7.4.13
+ */
 
-var App = {}
+var App = {};
 
-App.init = function() {
-	console.log('start app');
+App.init = function () {
 
-	App.checkSavedData();
+  console.log('start app');
+  App.checkSavedData();
 
 };
 
-App.getCurrentDate = function() {
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth();
-    var yyyy = today.getFullYear();
-    var hr = today.getHours();
-    var min = today.getMinutes();
+App.getCurrentDate = function () {
 
-    var monthsList = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
+  var today = new Date(),
+  dd = today.getDate(),
+  mm = today.getMonth(),
+  yyyy = today.getFullYear(),
+  hr = today.getHours(),
+  min = today.getMinutes();
 
-    if(dd<10){dd='0'+dd}
-    if(min<10){min='0'+min}
+  var monthsList = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
 
-    var formattedDate = monthsList[Number(mm)] + ' ' + dd + ' ' + yyyy + ' ' + hr + ':' + min;
+  if (dd < 10) {
+    dd = '0' + dd;
+  }
 
-    return {
-        displayDate: formattedDate,
-        dateObj: today,
-        hr: hr,
-        min: min,
-        month: mm,
-        day: dd
-    };
+  if (min < 10) {
+    min = '0' + min;
+  }
+
+  var formattedDate = monthsList[Number(mm)] + ' ' + dd + ' ' + yyyy + ' ' + hr + ':' + min;
+
+  return {
+    displayDate: formattedDate,
+    dateObj: today,
+    hr: hr,
+    min: min,
+    month: mm,
+    day: dd
+  };
+
 };
 
-App.dateOneMinuteFromNow = function() {
-    var d1 = new Date (),
-        d2 = new Date ( d1 );
-    d2.setMinutes ( d1.getMinutes() + 1 );
-    return d2;
+App.dateOneMinuteFromNow = function () {
+  var d1 = new Date(),
+      d2 = new Date(d1);
+  d2.setMinutes(d1.getMinutes() + 1);
+  return d2;
 };
 
-App.dateOneHourFromNow = function() {
-    var d1 = new Date (),
-        d2 = new Date ( d1 );
-    d2.setHours( d1.getHours() + 1 );
-    return d2;
+App.dateOneHourFromNow = function () {
+  var d1 = new Date(),
+      d2 = new Date(d1);
+  d2.setHours(d1.getHours() + 1);
+  return d2;
 };
 
-App.timeDifference = function(time1, time2) {
-    console.log('time1', time1);
-    console.log('time2', time2);
-    var diff = Math.abs(time1-time2);
-    return diff;
+App.dateOneDayFromNow = function () {
+  var d1 = new Date(),
+      d2 = new Date(d1);
+  d2.setDate(d1.getDate() + 1);
+  return d2;
 };
 
-App.viewModel = function() {
+App.dateOneWeekFromNow = function () {
+  var d1 = new Date(),
+      d2 = new Date(d1);
+  d2.setDate(d1.getDate() + 7);
+  return d2;
+};
 
-	var self = this;
+App.dateOneMonthFromNow = function () {
+  var d1 = new Date(),
+      d2 = new Date(d1);
+  d2.setMonth(d1.getMonth() + 1);
+  return d2;
+};
 
-	self.expenseList = ko.observableArray(App.savedData.expenseData) || ko.observableArray([]);
+App.timeDifference = function (time1, time2) {
+  console.log('time1', time1);
+  console.log('time2', time2);
+  /*
+  if (time1 typeof Date) {
+    console.log('Date Type');
+  } else if (time1 typeof Number){
+    console.log('Number Type');
+  }
+  */
+  var diff = Math.abs(time1 - time2);
+  return diff;
+};
 
-	self.incomeList = ko.observableArray(App.savedData.incomeData) || ko.observableArray([]);
+App.viewModel = function () {
 
-	self.recurringItems = ko.observableArray(App.savedData.recurringItems) || ko.observableArray([]);
+  var self = this;
 
-	self.total = ko.observable(0);
+  self.expenseList = ko.observableArray(App.savedData.expenseData) || ko.observableArray([]);
 
-    //////////////////
+  self.incomeList = ko.observableArray(App.savedData.incomeData) || ko.observableArray([]);
 
-	self.expenseNameAdd = ko.observable("");
+  self.recurringExpenseList = ko.observableArray(App.savedData.recurringExpense) || ko.observableArray([]);
 
-	self.expenseCostAdd = ko.observable("");
+  self.recurringIncomeList = ko.observableArray(App.savedData.recurringIncome) || ko.observableArray([]);
 
-	self.expenseRecurring = ko.observable(false);
+  self.total = ko.observable(0);
 
-    self.expenseDateAdded = ko.observable("");
+  //////////////////
 
-    /////////////////
+  self.expenseNameAdd = ko.observable("");
 
-	self.incomeNameAdd = ko.observable("");
+  self.expenseCostAdd = ko.observable("");
 
-	self.incomeCostAdd = ko.observable("");
+  self.isExpenseRecurring = ko.observable(false);
 
-	self.incomeRecurring = ko.observable(false);
+  self.chosenOption = ko.observable("");
 
-    self.incomeDateAdded = ko.observable("");
+  self.expenseRecurring = ko.computed(function() {
 
-    /////////////////
+    if (self.isExpenseRecurring()) {
+      $('.add-expense-modal').height(450);
+    } else {
+      $('.add-expense-modal').height(350);
+    }
 
-    self.recurringOptions = ko.observableArray(['Minutely', 'Hourly', 'Daily', 'Weekly', 'Bi-Weekly', 'Bi-Monthly', 'Monthly']);
+    return self.isExpenseRecurring();
 
-    self.updateRecurrence = function(originalDate, rType) {
+  }, self);
 
-        rType = rType || 'minutely'
+  self.expenseDateAdded = ko.observable("");
 
-        var diffInSeconds = App.timeDifference(originalDate.dateObj, App.dateOneMinuteFromNow());
-        var diffInSeconds2 = App.timeDifference(originalDate.dateObj, App.dateOneHourFromNow());
+  /////////////////
 
-        console.log('diffInSeconds', diffInSeconds);
-        console.log('diffInSeconds2', diffInSeconds2);
+  self.incomeNameAdd = ko.observable("");
 
-        setTimeout(cloneEntry(), diffInSeconds);
+  self.incomeCostAdd = ko.observable("");
 
-    };
+  self.isIncomeRecurring = ko.observable(false);
 
-	self.expenseTotalPrice = ko.computed(function() {
-		var total = 0;
-		for ( var i = 0; i < self.expenseList().length; i++) {
-			total += Number(self.expenseList()[i].cost);
-		}
-		return '$' + total;
-	}, self);
+  self.incomeRecurring = ko.computed(function () {
 
-    self.expenseTotal = ko.computed(function() {
-        var total = 0;
-        for ( var i = 0; i < self.expenseList().length; i++) {
-            total += Number(self.expenseList()[i].cost);
-        }
-        return total;
-    }, self);
+    if (self.isIncomeRecurring()) {
+      $('.add-income-modal').height(450);
+    } else {
+      $('.add-income-modal').height(350);
+    }
 
-	self.incomeTotalPrice = ko.computed(function() {
-		var total = 0;
-		for ( var i = 0; i < self.incomeList().length; i++) {
-			total += Number(self.incomeList()[i].cost);
-		}
-		return '$' + total;
-	}, self);
+    return self.isIncomeRecurring();
 
-    self.incomeTotal = ko.computed(function() {
-        var total = 0;
-        for ( var i = 0; i < self.incomeList().length; i++) {
-            total += Number(self.incomeList()[i].cost);
-        }
-        return total;
-    }, self);
+  }, self);
 
-	self.remainingBudget = ko.computed(function() {
-		var total = Number(self.incomeTotal()) - Number(self.expenseTotal());
-		return '$' + total;
-	}, self);
+  self.incomeDateAdded = ko.observable("");
 
-	self.isValidExpenseNumber = ko.computed(function() {
-		var textNum = Number(self.expenseCostAdd());
-		if ( isNaN(textNum) || textNum == "" ) {
-			return false;
-		} else {
-			return true;
-		}
-	}, self);
+  /////////////////
 
-	self.isValidIncomeNumber = ko.computed(function() {
-		var textNum = Number(self.incomeCostAdd());
-		if ( isNaN(textNum) || textNum == "" ) {
-			return false;
-		} else {
-			return true;
-		}
-	}, self);
+  self.recurringOptions = ko.observableArray(['Minutely', 'Hourly', 'Daily', 'Weekly', 'Bi-Weekly', 'Bi-Monthly', 'Monthly', 'Annual']);
 
-	self.validateExpenseFields = ko.computed(function() {
-		if (self.expenseNameAdd().length > 0 && self.expenseCostAdd().length > 0 && self.isValidExpenseNumber() ) {
-			return true;
-		} else {
-			return false;
-		}
-	}, self);
+  self.updateRecurrence = function(originalDate, rType) {
 
-	self.validateIncomeFields = ko.computed(function() {
-		if (self.incomeNameAdd().length > 0 && self.incomeCostAdd().length > 0 && self.isValidIncomeNumber() ) {
-			return true;
-		} else {
-			return false;
-		}
-	}, self);
+    rType = typeof rType !== 'undefined' ? rType : 'Hourly';
 
-	self.addNewExpense = function() {
-		if ( self.validateExpenseFields() ) {
+    console.log('originalDate', originalDate);
+    console.log('rType', rType);
 
-			var newExpenseItem = {
-				expenseName: self.expenseNameAdd(),
-				cost: self.expenseCostAdd(),
-				recurring: self.expenseRecurring(),
-                dateCreated: App.getCurrentDate().displayDate,
-                dateAddRecurrence: self.updateRecurrence(App.getCurrentDate())
-			}
+    var diffInSeconds;
 
-			self.expenseList.push(newExpenseItem);
+    console.log('originalDate.dateObj', originalDate.dateObj);
 
-			self.clearField();
+    switch (rType) {
+      case 'Minutely':
+        console.log('MINUTES');
+        diffInSeconds = App.timeDifference(originalDate.dateObj, App.dateOneMinuteFromNow());
+        break;
+      case 'Hourly':
+        console.log('HOURLY');
+        diffInSeconds = App.timeDifference(originalDate.dateObj, App.dateOneMinuteFromNow());
+        break;
+      case 'Daily':
+        console.log('DAILY');
+        diffInSeconds = App.timeDifference(originalDate.dateObj, App.dateOneDayFromNow());
+        break;
+      case 'Weekly':
+        console.log('WEEKLY');
+        diffInSeconds = App.timeDifference(originalDate.dateObj, App.dateOneWeekFromNow());
+        break;
+      case 'Bi-Weekly':
+        diffInSeconds = App.timeDifference(originalDate.dateObj, App.dateOneMinuteFromNow());
+        break;
+      case 'Bi-Monthly':
+        diffInSeconds = App.timeDifference(originalDate.dateObj, App.dateOneMinuteFromNow());
+        break;
+      case 'Monthly':
+        diffInSeconds = App.timeDifference(originalDate.dateObj, App.dateOneMonthFromNow());
+        break;
+      case 'Annual':
+        diffInSeconds = App.timeDifference(originalDate.dateObj, App.dateOneMinuteFromNow());
+        break;
+    }
 
-			//App.savedData.expenseData.push(newExpenseItem);
-			App.saveBudget();
+    //diffInSeconds2 = App.timeDifference(originalDate.dateObj, App.dateOneHourFromNow());
 
-    	}
-	};
+    console.log('diffInSeconds', diffInSeconds);
+    //console.log('diffInSeconds2', diffInSeconds2);
 
-    self.removeExpense = function() {
-        self.expenseList.remove(this);
-    };
+    setTimeout(self.cloneEntry, diffInSeconds);
+    //setInterval(self.cloneEntry, 60000);
 
-	self.addNewIncome = function() {
-		if ( self.validateIncomeFields() ) {
+  };
 
-			var newIncomeItem = {
-				incomeName: self.incomeNameAdd(),
-				cost: self.incomeCostAdd(),
-                recurring: self.incomeRecurring(),
-                dateCreated: App.getCurrentDate().displayDate,
-                dateAddRecurrence: self.updateRecurrence(App.getCurrentDate())
-			}
+  self.cloneEntry = function() {
 
-			self.incomeList.push(newIncomeItem);
+    var clonedExpense = self.expenseList()[self.expenseList().length - 1];
+    clonedExpense.dateCreated = App.getCurrentDate().displayDate;
+    self.expenseList.push(clonedExpense);
 
-            self.recurringItems.push(newIncomeItem);
+  };
 
-			self.clearField();
+  self.expenseTotalPrice = ko.computed(function () {
+    var total = 0;
+    for (var i = 0; i < self.expenseList().length; i++) {
+      total += Number(self.expenseList()[i].cost);
+    }
+    return '$' + total;
+  }, self);
 
-			//App.savedData.incomeData.push(newIncomeItem);
-            App.saveBudget();
+  self.expenseTotal = ko.computed(function () {
+    var total = 0;
+    for (var i = 0; i < self.expenseList().length; i++) {
+      total += Number(self.expenseList()[i].cost);
+    }
+    return total;
+  }, self);
 
-    	}
-	};
+  self.incomeTotalPrice = ko.computed(function () {
+    var total = 0;
+    for (var i = 0; i < self.incomeList().length; i++) {
+      total += Number(self.incomeList()[i].cost);
+    }
+    return '$' + total;
+  }, self);
 
-    self.removeIncome = function() {
-        self.incomeList.remove(this);
-    };
+  self.incomeTotal = ko.computed(function () {
+    var total = 0;
+    for (var i = 0; i < self.incomeList().length; i++) {
+      total += Number(self.incomeList()[i].cost);
+    }
+    return total;
+  }, self);
 
-	self.clearField = function() {
-		self.expenseNameAdd("");
-		self.expenseCostAdd("");
+  self.remainingBudget = ko.computed(function () {
+    var total = Number(self.incomeTotal()) - Number(self.expenseTotal());
+    return '$' + total;
+  }, self);
 
-		$('.add-expense-modal').hide();
-		$('.add-income-modal').hide();
-		$('.lightbox').hide();
-	};
+  self.isValidExpenseNumber = ko.computed(function () {
+    var textNum = Number(self.expenseCostAdd());
+    if (isNaN(textNum) || textNum == "") {
+      return false;
+    } else {
+      return true;
+    }
+  }, self);
 
-	self.showExpenseModal = function() {
-		$('.add-expense-modal').show();
+  self.isValidIncomeNumber = ko.computed(function () {
+    var textNum = Number(self.incomeCostAdd());
+    if (isNaN(textNum) || textNum == "") {
+      return false;
+    } else {
+      return true;
+    }
+  }, self);
 
-		$('.lightbox').width = $(window).width();
-		$('.lightbox').height = $(window).height();
-		$('.lightbox').show();
-	};
+  self.validateExpenseFields = ko.computed(function () {
+    if (self.expenseNameAdd().length > 0 && self.expenseCostAdd().length > 0 && self.isValidExpenseNumber()) {
+      return true;
+    } else {
+      return false;
+    }
+  }, self);
 
-	self.showIncomeModal = function() {
-		$('.add-income-modal').show();
+  self.validateIncomeFields = ko.computed(function () {
+    if (self.incomeNameAdd().length > 0 && self.incomeCostAdd().length > 0 && self.isValidIncomeNumber()) {
+      return true;
+    } else {
+      return false;
+    }
+  }, self);
 
-		$('.lightbox').width = $(window).width();
-		$('.lightbox').height = $(window).height();
-		$('.lightbox').show();
-	};
+  self.addNewExpense = function () {
 
-    self.closeModal = function() {
-        self.clearField();
-    };
+    //if required fields are valid then continue
+    if (self.validateExpenseFields()) {
 
-    self.clearStorage = function() {
-        console.log('STORAGE CLEARED');
-        localStorage.clear();
-    };
+      var newExpenseItem = {
+        expenseName: self.expenseNameAdd(),
+        cost: self.expenseCostAdd(),
+        recurring: self.expenseRecurring(),
+        recurringInterval: self.chosenOption(),
+        dateCreated: App.getCurrentDate().displayDate,
+        fullDate: new Date().getDate(),
+        dateAddRecurrence: self.updateRecurrence(App.getCurrentDate())
+      };
 
-    self.init = function() {
+      console.log('newExpenseItem', newExpenseItem);
 
-        //loop through all recurring items
+      self.expenseList.push(newExpenseItem);
+      if (newExpenseItem.recurring) self.recurringExpenseList.push(newExpenseItem);
+      self.clearField();
 
-    };
+      //App.savedData.expenseData.push(newExpenseItem);
+      App.saveBudget();
 
-    self.init();
+    }
 
-	return self;
+  };
+
+  self.removeExpense = function () {
+    self.expenseList.remove(this);
+  };
+
+  self.addNewIncome = function () {
+    if (self.validateIncomeFields()) {
+
+      var newIncomeItem = {
+        incomeName: self.incomeNameAdd(),
+        cost: self.incomeCostAdd(),
+        recurring: self.incomeRecurring(),
+        dateCreated: App.getCurrentDate().displayDate,
+        fullDate: new Date(),
+        dateAddRecurrence: self.updateRecurrence(App.getCurrentDate())
+      };
+
+      console.log('newIncomeItem', newIncomeItem);
+
+      self.incomeList.push(newIncomeItem);
+
+      self.expenseRecurring.push(newIncomeItem);
+
+      self.clearField();
+
+      //App.savedData.incomeData.push(newIncomeItem);
+      App.saveBudget();
+
+    }
+  };
+
+  self.removeIncome = function () {
+    self.incomeList.remove(this);
+  };
+
+  self.clearField = function () {
+    self.expenseNameAdd("");
+    self.expenseCostAdd("");
+
+    $('.add-expense-modal').hide();
+    $('.add-income-modal').hide();
+    $('.lightbox').hide();
+  };
+
+  self.showExpenseModal = function () {
+    $('.add-expense-modal').show();
+
+    $('.lightbox').width = $(window).width();
+    $('.lightbox').height = $(window).height();
+    $('.lightbox').show();
+  };
+
+  self.showIncomeModal = function () {
+    $('.add-income-modal').show();
+
+    $('.lightbox').width = $(window).width();
+    $('.lightbox').height = $(window).height();
+    $('.lightbox').show();
+  };
+
+  self.closeModal = function () {
+    self.clearField();
+  };
+
+  self.clearStorage = function () {
+    console.log('STORAGE CLEARED');
+    localStorage.clear();
+  };
+
+  self.findTimeDifference = function(originalDate, rType){
+    var diffInSeconds;
+    switch (rType) {
+      case 'Minutely':
+        console.log('MINUTES');
+        diffInSeconds = App.timeDifference(originalDate.dateObj, App.dateOneMinuteFromNow());
+        break;
+      case 'Hourly':
+        console.log('HOURLY');
+        diffInSeconds = App.timeDifference(originalDate.dateObj, App.dateOneMinuteFromNow());
+        break;
+      case 'Daily':
+        console.log('DAILY');
+        diffInSeconds = App.timeDifference(originalDate.dateObj, App.dateOneDayFromNow());
+        break;
+      case 'Weekly':
+        console.log('WEEKLY');
+        diffInSeconds = App.timeDifference(originalDate.dateObj, App.dateOneWeekFromNow());
+        break;
+      case 'Bi-Weekly':
+        diffInSeconds = App.timeDifference(originalDate.dateObj, App.dateOneMinuteFromNow());
+        break;
+      case 'Bi-Monthly':
+        diffInSeconds = App.timeDifference(originalDate.dateObj, App.dateOneMinuteFromNow());
+        break;
+      case 'Monthly':
+        diffInSeconds = App.timeDifference(originalDate.dateObj, App.dateOneMonthFromNow());
+        break;
+      case 'Annual':
+        diffInSeconds = App.timeDifference(originalDate.dateObj, App.dateOneMinuteFromNow());
+        break;
+    }
+  };
+
+  self.init = function () {
+
+    //loop through all recurring items
+    $(App.savedData.recurringExpense).each(function(i){
+
+      var currentItem = App.savedData.recurringExpense[i];
+      var dateCreated = currentItem.fullDate;
+      var currentDate = App.getCurrentDate().dateObj;
+      console.log('currentItem', currentItem);
+      console.log('dateCreated', dateCreated);
+      console.log('currentDate', currentDate);
+
+      var diffInSeconds = App.timeDifference(dateCreated, currentDate);
+
+      console.log('diffInSeconds', diffInSeconds);
+
+    })
+
+  };
+
+  self.init();
+
+  return self;
 
 }
 
 App.localStorageObjectKey = 'savedBudgetData';
 
-App.saveBudget = function() {
+App.saveBudget = function () {
 
-    localStorage.clear();
+  localStorage.clear();
 
-    console.log('App.savedData', App.savedData);
+  console.log('App.savedData', App.savedData);
 
-    // Put the object into storage
-    localStorage.setItem(App.localStorageObjectKey, JSON.stringify(App.savedData));
+  // Put the object into storage
+  localStorage.setItem(App.localStorageObjectKey, JSON.stringify(App.savedData));
 
 };
 
 App.savedData = {
-	expenseData: [],
-	incomeData: [],
-    recurringItems: []
+  expenseData: [],
+  incomeData: [],
+  recurringExpense: [],
+  recurringIncome: []
 };
 
-App.checkSavedData = function() {
+App.checkSavedData = function () {
 
-    // Retrieve the object from storage
-    var savedBudgetDataString = localStorage.getItem(App.localStorageObjectKey),
-        savedBudgetDataObject;
+  // Retrieve the object from storage
+  var savedBudgetDataString = localStorage.getItem(App.localStorageObjectKey),
+      savedBudgetDataObject;
 
-	if (savedBudgetDataString) {
+  if (savedBudgetDataString) {
 
-        console.log('RETRIEVING APP DATA');
+    console.log('RETRIEVING APP DATA');
 
-        savedBudgetDataObject = JSON.parse(savedBudgetDataString);
+    savedBudgetDataObject = JSON.parse(savedBudgetDataString);
 
-        console.log('savedBudgetDataObject', savedBudgetDataObject);
+    console.log('savedBudgetDataObject', savedBudgetDataObject);
 
+    App.savedData = savedBudgetDataObject;
 
-		App.savedData = savedBudgetDataObject;
+    ko.applyBindings(App.viewModel());
 
-        ko.applyBindings(App.viewModel());
+  } else {
 
-	} else {
+    console.log('NO APP DATA');
+    ko.applyBindings(App.viewModel());
 
-        console.log('NO APP DATA');
-        ko.applyBindings(App.viewModel());
-
-    }
+  }
 
 };
 

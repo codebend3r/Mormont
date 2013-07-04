@@ -59,7 +59,9 @@ body {
   margin: 0 0 10px 0; }
 
 .recurring-list {
-  width: 300px; }
+  width: 300px;
+  padding: 5px;
+  margin: 10px 0; }
 
 .total, .budget-items {
   font-weight: bold;
@@ -76,7 +78,7 @@ body {
   border-bottom: 1px dotted white; }
 
 .income-bg {
-  background-color: #a9dc3a; }
+  background-color: #76ad40; }
 
 .expense-bg {
   background-color: #d45354;
@@ -87,7 +89,7 @@ body {
   margin: 0 0 10px 0; }
 
 .income-colour {
-  color: #a9dc3a; }
+  color: #fafafa; }
 
 .expense-colour {
-  color: #d45354; }
+  color: #fafafa; }
