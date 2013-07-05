@@ -20,7 +20,8 @@ App.getCurrentDate = function () {
   mm = today.getMonth(),
   yyyy = today.getFullYear(),
   hr = today.getHours(),
-  min = today.getMinutes();
+  min = today.getMinutes(),
+  utcDate = today.getUTCDate();
 
   var monthsList = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ];
 
@@ -40,7 +41,9 @@ App.getCurrentDate = function () {
     hr: hr,
     min: min,
     month: mm,
-    day: dd
+    day: dd,
+    year: yyyy,
+    utcDate: utcDate
   };
 
 };
@@ -81,8 +84,6 @@ App.dateOneMonthFromNow = function () {
 };
 
 App.timeDifference = function (time1, time2) {
-  console.log('time1', time1);
-  console.log('time2', time2);
   /*
   if (time1 typeof Date) {
     console.log('Date Type');
@@ -162,8 +163,8 @@ App.viewModel = function () {
 
     rType = typeof rType !== 'undefined' ? rType : 'Hourly';
 
-    console.log('originalDate', originalDate);
-    console.log('rType', rType);
+    //console.log('originalDate', originalDate);
+    //console.log('rType', rType);
 
     var diffInSeconds;
 
@@ -300,7 +301,7 @@ App.viewModel = function () {
         recurring: self.expenseRecurring(),
         recurringInterval: self.chosenOption(),
         dateCreated: App.getCurrentDate().displayDate,
-        fullDate: new Date().getDate(),
+        dateObject: App.getCurrentDate(),
         dateAddRecurrence: self.updateRecurrence(App.getCurrentDate())
       };
 
@@ -425,15 +426,28 @@ App.viewModel = function () {
     $(App.savedData.recurringExpense).each(function(i){
 
       var currentItem = App.savedData.recurringExpense[i];
-      var dateCreated = currentItem.fullDate;
-      var currentDate = App.getCurrentDate().dateObj;
+
       console.log('currentItem', currentItem);
-      console.log('dateCreated', dateCreated);
-      console.log('currentDate', currentDate);
 
-      var diffInSeconds = App.timeDifference(dateCreated, currentDate);
+      var fullDate = currentItem.dateObject;
+      var dateCreatedInMinutes = fullDate.min;
+      var dateCreatedInHours = fullDate.hour;
 
-      console.log('diffInSeconds', diffInSeconds);
+      var currentDate = App.getCurrentDate();
+
+      var currentTimeInMinutes = currentDate.min;
+      var currentTimeInHours = currentDate.hour;
+
+      console.log('dateCreatedInMinutes', dateCreatedInMinutes);
+      console.log('dateCreatedInHours', dateCreatedInHours);
+      console.log('//////////////////////////');
+      console.log('currentTimeInMinutes', currentTimeInMinutes);
+      console.log('currentTimeInHours', currentTimeInHours);
+      //console.log('currentDate', currentDate);
+
+      //var diffInSeconds = App.timeDifference(dateCreated, currentDate);
+
+      //console.log('diffInSeconds', diffInSeconds);
 
     })
 
