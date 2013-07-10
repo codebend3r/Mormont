@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d857d3d0-a275-4cf2-b9ec-9ff06bc83811" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/internal/mormont.js" afterPath="$PROJECT_DIR$/js/internal/mormont.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="d857d3d0-a275-4cf2-b9ec-9ff06bc83811" name="Default" comment="" />
     <ignored path="__release.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/beta.html" changelist="d857d3d0-a275-4cf2-b9ec-9ff06bc83811" time="1360964370211" ignored="false" />
     <file path="/styles.scss" changelist="d857d3d0-a275-4cf2-b9ec-9ff06bc83811" time="1362616387640" ignored="false" />
     <file path="/model.js" changelist="d857d3d0-a275-4cf2-b9ec-9ff06bc83811" time="1363227064677" ignored="false" />
     <file path="/portfolio.js" changelist="d857d3d0-a275-4cf2-b9ec-9ff06bc83811" time="1360524839761" ignored="false" />
-    <file path="/Dummy.txt" changelist="d857d3d0-a275-4cf2-b9ec-9ff06bc83811" time="1373034816591" ignored="false" />
+    <file path="/Dummy.txt" changelist="d857d3d0-a275-4cf2-b9ec-9ff06bc83811" time="1373292866083" ignored="false" />
     <file path="/jquery-1.9.1.min.js" changelist="d857d3d0-a275-4cf2-b9ec-9ff06bc83811" time="1361298786968" ignored="false" />
     <file path="/crivas.js" changelist="d857d3d0-a275-4cf2-b9ec-9ff06bc83811" time="1361299111914" ignored="false" />
     <file path="/index.html" changelist="d857d3d0-a275-4cf2-b9ec-9ff06bc83811" time="1372970845098" ignored="false" />
@@ -178,7 +175,7 @@
       <file leaf-file-name="mormont.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/internal/mormont.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="434" column="100" selection-start="11348" selection-end="11348" vertical-scroll-proportion="0.43396226">
+            <state line="434" column="100" selection-start="11348" selection-end="11348" vertical-scroll-proportion="0.32416952">
               <folding>
                 <element signature="e#0#59#0" expanded="false" />
                 <element signature="e#99#156#0" expanded="false" />
@@ -383,6 +380,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -449,18 +448,16 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="options.lastSelected" value="preferences.sourceCode.General" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../AshtonWoodsHomes" />
     <property name="FullScreen" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -530,7 +527,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -549,7 +546,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1456777" sideWeight="0.6718576" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1456777" sideWeight="0.6718576" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -649,9 +646,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="37" selection-start="359" selection-end="359" vertical-scroll-proportion="0.3618421">
-          <folding />
-        </state>
+        <state line="22" column="37" selection-start="359" selection-end="359" vertical-scroll-proportion="0.3618421" />
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/resources/html5-schema/common.rnc">
@@ -727,7 +722,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/internal/mormont.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="434" column="100" selection-start="11348" selection-end="11348" vertical-scroll-proportion="0.43396226">
+        <state line="434" column="100" selection-start="11348" selection-end="11348" vertical-scroll-proportion="0.32416952">
           <folding>
             <element signature="e#0#59#0" expanded="false" />
             <element signature="e#99#156#0" expanded="false" />

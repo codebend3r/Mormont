@@ -3,7 +3,7 @@ bin
 release
 
 # RubyMine/IntelliJ
-.idea
+.idea/
 
 # Sass
 .sass-cache
